@@ -9,10 +9,6 @@ import (
 	"golang.org/x/sys/windows"
 )
 
-//go:generate go run github.com/nsf/bin2go -in .\arm64\WebView2Loader.dll -out module_arm64.go -pkg webviewloader moduleBin
-//go:generate go run github.com/nsf/bin2go -in .\x64\WebView2Loader.dll -out module_amd64.go -pkg webviewloader moduleBin
-//go:generate go run github.com/nsf/bin2go -in .\x86\WebView2Loader.dll -out module_386.go -pkg webviewloader moduleBin
-
 var (
 	nativeModule = windows.NewLazyDLL("WebView2Loader")
 	nativeCreate = nativeModule.NewProc("CreateCoreWebView2EnvironmentWithOptions")
