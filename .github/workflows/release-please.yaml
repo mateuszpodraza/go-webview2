@@ -10,7 +10,7 @@ jobs:
       - uses: GoogleCloudPlatform/release-please-action@v2
         with:
           release-type: simple
-          package-name: release-please-action
+          package-name: webview2
           changelog-types: |
             [
               {
