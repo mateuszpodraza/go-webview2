@@ -6,32 +6,24 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/jchv/go-webview2/webviewloader"
+	"github.com/mattpodraza/webview2/pkg/webviewloader"
 	"golang.org/x/sys/windows"
 )
 
 type _EventRegistrationToken struct {
-	value int64
+	Value int64
 }
 
 type _CoreWebView2PermissionKind uint32
 
 const (
-	_CoreWebView2PermissionKindUnknownPermission _CoreWebView2PermissionKind = iota
-	_CoreWebView2PermissionKindMicrophone
-	_CoreWebView2PermissionKindCamera
-	_CoreWebView2PermissionKindGeolocation
-	_CoreWebView2PermissionKindNotifications
-	_CoreWebView2PermissionKindOtherSensors
-	_CoreWebView2PermissionKindClipboardRead
+	_CoreWebView2PermissionKindClipboardRead _CoreWebView2PermissionKind = 6
 )
 
 type _CoreWebView2PermissionState uint32
 
 const (
-	_CoreWebView2PermissionStateDefault _CoreWebView2PermissionState = iota
-	_CoreWebView2PermissionStateAllow
-	_CoreWebView2PermissionStateDeny
+	_CoreWebView2PermissionStateAllow _CoreWebView2PermissionState = 1
 )
 
 func createCoreWebView2EnvironmentWithOptions(browserExecutableFolder, userDataFolder *uint16, environmentOptions uintptr, environmentCompletedHandle *iCoreWebView2CreateCoreWebView2EnvironmentCompletedHandler) (uintptr, error) {
@@ -106,7 +98,6 @@ type iUnknownImpl interface {
 }
 
 // ICoreWebView2
-
 type iCoreWebView2Vtbl struct {
 	iUnknownVtbl
 	GetSettings                            ComProc
@@ -222,7 +213,6 @@ type iCoreWebView2Controller struct {
 }
 
 // ICoreWebView2WebMessageReceivedEventArgs
-
 type iCoreWebView2WebMessageReceivedEventArgsVtbl struct {
 	iUnknownVtbl
 	GetSource                ComProc
@@ -235,7 +225,6 @@ type iCoreWebView2WebMessageReceivedEventArgs struct {
 }
 
 // ICoreWebView2PermissionRequestedEventArgs
-
 type iCoreWebView2PermissionRequestedEventArgsVtbl struct {
 	iUnknownVtbl
 	GetURI             ComProc
@@ -251,7 +240,6 @@ type iCoreWebView2PermissionRequestedEventArgs struct {
 }
 
 // ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler
-
 type iCoreWebView2CreateCoreWebView2EnvironmentCompletedHandlerImpl interface {
 	iUnknownImpl
 	EnvironmentCompleted(res uintptr, env *iCoreWebView2Environment) uintptr
@@ -349,7 +337,6 @@ func newICoreWebView2CreateCoreWebView2ControllerCompletedHandler(impl iCoreWebV
 }
 
 // ICoreWebView2WebMessageReceivedEventHandler
-
 type iCoreWebView2WebMessageReceivedEventHandlerImpl interface {
 	iUnknownImpl
 	MessageReceived(sender *iCoreWebView2, args *iCoreWebView2WebMessageReceivedEventArgs) uintptr
@@ -398,7 +385,6 @@ func newICoreWebView2WebMessageReceivedEventHandler(impl iCoreWebView2WebMessage
 }
 
 // ICoreWebView2PermissionRequestedEventHandler
-
 type iCoreWebView2PermissionRequestedEventHandlerImpl interface {
 	iUnknownImpl
 	PermissionRequested(sender *iCoreWebView2, args *iCoreWebView2PermissionRequestedEventArgs) uintptr
