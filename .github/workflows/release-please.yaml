@@ -37,5 +37,10 @@ jobs:
                 "type": "docs",
                 "section": "Documentation",
                 "hidden": false
+              },
+              {
+                "type": "ci",
+                "section": "CI",
+                "hidden": false
               }
             ]
