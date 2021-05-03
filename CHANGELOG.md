@@ -1,5 +1,17 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/mattpodraza/webview2/compare/v1.0.0...v1.0.1) (2021-05-03)
+
+
+### CI
+
+* fix the release name ([de625fe](https://www.github.com/mattpodraza/webview2/commit/de625fe9a2e653f8977adca691d24846a31f4962))
+
+
+### Chores
+
+* start showing CI commits in the changelog ([b41dd23](https://www.github.com/mattpodraza/webview2/commit/b41dd2375099b702c87f341c99915b2ff66daf5d))
+
 ## 1.0.0 (2021-05-03)
 
 
