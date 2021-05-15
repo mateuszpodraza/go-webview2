@@ -9,7 +9,10 @@ import (
 func main() {
 	wv, err := webview2.New(
 		webview2.WithTitle("The Go Programming Language"),
+		webview2.WithMinSize(640, 480),
 		webview2.WithSize(800, 600),
+		webview2.WithMaxSize(1280, 720),
+		webview2.WithDevtools(false),
 		webview2.WithURL("https://golang.org"),
 	)
 
