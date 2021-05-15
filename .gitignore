@@ -4,5 +4,3 @@
 # Compiled binaries
 *.exe
 
-# Generated code
-*_string.go
