@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://www.github.com/mattpodraza/webview2/compare/v2.0.1...v2.1.0) (2021-05-15)
+
+
+### Features
+
+* bring back support for Eval (now called ExecuteScript) and Init (now called AddScriptToExecuteOnDocumentCreated) ([8a9301d](https://www.github.com/mattpodraza/webview2/commit/8a9301d62c3cf44bd1020ef20de67a5a7e88beb4))
+* expose the browser and window structs, make a bit more functions public ([f02b298](https://www.github.com/mattpodraza/webview2/commit/f02b298c57c65bb933c1ebf5a07a72fe3944e319))
+
 ### [2.0.1](https://www.github.com/mattpodraza/webview2/compare/v2.0.0...v2.0.1) (2021-05-15)
 
 
