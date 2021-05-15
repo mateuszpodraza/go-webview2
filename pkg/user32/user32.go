@@ -13,8 +13,10 @@ import (
 const (
 	CW_USEDEFAULT = 0x80000000
 
-	SystemMetricsCxIcon = 11
-	SystemMetricsCyIcon = 12
+	SystemMetricsCxScreen = 0
+	SystemMetricsCyScreen = 1
+	SystemMetricsCxIcon   = 11
+	SystemMetricsCyIcon   = 12
 
 	GWLStyle = -16
 
@@ -28,6 +30,7 @@ const (
 
 	SWPNoZOrder     = 0x0004
 	SWPNoActivate   = 0x0010
+	SWPNoSize       = 0x0001
 	SWPNoMove       = 0x0002
 	SWPFrameChanged = 0x0020
 
@@ -39,8 +42,23 @@ const (
 	WMApp           = 0x8000
 )
 
+const (
+	SW_HIDE = iota
+	SW_SHOWNORMAL
+	SW_SHOWMINIMIZED
+	SW_SHOWMAXIMIZED
+	SW_SHOWNOACTIVATE
+	SW_SHOW
+	SW_MINIMIZE
+	SW_SHOWMINNOACTIVE
+	SW_SHOWNA
+	SW_RESTORE
+	SW_SHOWDEFAULT
+	SW_FORCEMINIMIZE
+)
+
 var (
-	errSuccess = syscall.Errno(0)
+	errOK = syscall.Errno(0)
 
 	user32 = windows.NewLazySystemDLL("user32")
 
@@ -118,7 +136,7 @@ func GetMessageW() (*Msg, error) {
 		0,
 	)
 
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return nil, err
 	}
 
@@ -131,7 +149,7 @@ func GetMessageW() (*Msg, error) {
 
 func TranslateMessage(msg *Msg) error {
 	_, _, err := translateMessage.Call(uintptr(unsafe.Pointer(msg)))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -140,7 +158,7 @@ func TranslateMessage(msg *Msg) error {
 
 func DispatchMessageW(msg *Msg) error {
 	_, _, err := dispatchMessageW.Call(uintptr(unsafe.Pointer(msg)))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -149,7 +167,7 @@ func DispatchMessageW(msg *Msg) error {
 
 func PostQuitMessage(exitCode int) error {
 	_, _, err := postQuitMessage.Call(uintptr(exitCode))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -158,7 +176,7 @@ func PostQuitMessage(exitCode int) error {
 
 func DestroyWindow(hwnd windows.Handle) error {
 	_, _, err := destroyWindow.Call(uintptr(hwnd))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -167,7 +185,7 @@ func DestroyWindow(hwnd windows.Handle) error {
 
 func DefWindowProcW(hwnd, msg, wp, lp uintptr) (uintptr, error) {
 	r, _, err := defWindowProcW.Call(hwnd, msg, wp, lp)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return 0, err
 	}
 
@@ -176,7 +194,7 @@ func DefWindowProcW(hwnd, msg, wp, lp uintptr) (uintptr, error) {
 
 func RegisterClassExW(wc *WndClassExW) error {
 	_, _, err := registerClassExW.Call(uintptr(unsafe.Pointer(wc)))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -209,16 +227,16 @@ func CreateWindowExW(className, windowName string, x, y, width, height int, hIns
 		0,
 	)
 
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return 0, err
 	}
 
 	return windows.Handle(hwndptr), nil
 }
 
-func ShowWindow(hwnd windows.Handle) error {
-	_, _, err := showWindow.Call(uintptr(hwnd), 5)
-	if err != nil && !errors.Is(err, errSuccess) {
+func ShowWindow(hwnd windows.Handle, cmdShow int) error {
+	_, _, err := showWindow.Call(uintptr(hwnd), uintptr(cmdShow))
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -227,7 +245,7 @@ func ShowWindow(hwnd windows.Handle) error {
 
 func SetFocus(hwnd windows.Handle) error {
 	_, _, err := setFocus.Call(uintptr(hwnd))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -236,7 +254,7 @@ func SetFocus(hwnd windows.Handle) error {
 
 func GetSystemMetrics(metric uintptr) (uintptr, error) {
 	hwnd, _, err := getSystemMetrics.Call(metric)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return 0, err
 	}
 
@@ -245,7 +263,7 @@ func GetSystemMetrics(metric uintptr) (uintptr, error) {
 
 func LoadImageW(hInstance windows.Handle, cx, cy uintptr) (windows.Handle, error) {
 	hwnd, _, err := loadImageW.Call(uintptr(hInstance), 32512, cx, cy, 0)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return 0, err
 	}
 
@@ -259,7 +277,7 @@ func SetWindowTextW(hwnd windows.Handle, text string) error {
 	}
 
 	_, _, err = setWindowTextW.Call(uintptr(hwnd), uintptr(unsafe.Pointer(tptr)))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -268,7 +286,7 @@ func SetWindowTextW(hwnd windows.Handle, text string) error {
 
 func GetWindowLongPtrW(hwnd windows.Handle, nIndex uintptr) (uintptr, error) {
 	info, _, err := getWindowLongPtrW.Call(uintptr(hwnd), nIndex)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return 0, err
 	}
 
@@ -277,7 +295,7 @@ func GetWindowLongPtrW(hwnd windows.Handle, nIndex uintptr) (uintptr, error) {
 
 func SetWindowLongPtrW(hwnd windows.Handle, nIndex uintptr, newLong uintptr) error {
 	_, _, err := setWindowLongPtrW.Call(uintptr(hwnd), nIndex, newLong)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -291,7 +309,7 @@ func AdjustWindowRec(rect *Rect, style uintptr, hasMenu bool) error {
 	}
 
 	_, _, err := adjustWindowRect.Call(uintptr(unsafe.Pointer(rect)), style, hm)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -308,7 +326,7 @@ func SetWindowPos(hwnd windows.Handle, x, y, cx, cy int32, flags uintptr) error 
 		uintptr(cy),
 		flags,
 	)
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return err
 	}
 
@@ -318,7 +336,7 @@ func SetWindowPos(hwnd windows.Handle, x, y, cx, cy int32, flags uintptr) error 
 func GetClientRect(hwnd windows.Handle) (*Rect, error) {
 	var rect Rect
 	_, _, err := getClientRect.Call(uintptr(hwnd), uintptr(unsafe.Pointer(&rect)))
-	if err != nil && !errors.Is(err, errSuccess) {
+	if err != nil && !errors.Is(err, errOK) {
 		return nil, err
 	}
 
