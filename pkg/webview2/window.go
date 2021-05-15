@@ -19,19 +19,23 @@ type window struct {
 	handle windows.Handle
 }
 
-func (w *window) focus() error {
+func (wv *WebView) Window() *window {
+	return wv.window
+}
+
+func (w *window) Focus() error {
 	return user32.SetFocus(w.handle)
 }
 
-func (w *window) show() error {
+func (w *window) Show() error {
 	return user32.ShowWindow(w.handle, user32.SW_SHOW)
 }
 
-func (w *window) setTitle(title string) error {
+func (w *window) SetTitle(title string) error {
 	return user32.SetWindowTextW(w.handle, title)
 }
 
-func (w *window) center() error {
+func (w *window) Center() error {
 	sx, err := user32.GetSystemMetrics(user32.SystemMetricsCxScreen)
 	if err != nil {
 		return fmt.Errorf("failed to get the horizontal screen size: %w", err)
@@ -72,7 +76,7 @@ func (w *window) center() error {
 	return nil
 }
 
-func (w *window) setSize(width, height int32) error {
+func (w *window) SetSize(width, height int32) error {
 	rect := user32.Rect{
 		Left:   0,
 		Top:    0,

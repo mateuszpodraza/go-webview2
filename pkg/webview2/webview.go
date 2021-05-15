@@ -82,7 +82,7 @@ func New(options ...Option) (*WebView, error) {
 		return nil, fmt.Errorf("failed to initialize the window: %w", err)
 	}
 
-	if err := wv.browser.navigate(wv.browser.config.initialURL); err != nil {
+	if err := wv.browser.Navigate(wv.browser.config.initialURL); err != nil {
 		return nil, fmt.Errorf("failed at the initial navigation: %w", err)
 	}
 
@@ -146,23 +146,23 @@ func (wv *WebView) createWindow() error {
 }
 
 func (wv *WebView) initializeWindow() error {
-	if err := wv.window.setTitle(wv.window.config.title); err != nil {
+	if err := wv.window.SetTitle(wv.window.config.title); err != nil {
 		return fmt.Errorf("failed to set the window title: %w", err)
 	}
 
-	if err := wv.window.setSize(wv.window.config.width, wv.window.config.height); err != nil {
+	if err := wv.window.SetSize(wv.window.config.width, wv.window.config.height); err != nil {
 		return fmt.Errorf("failed to set the window size: %w", err)
 	}
 
-	if err := wv.window.center(); err != nil {
+	if err := wv.window.Center(); err != nil {
 		return fmt.Errorf("failed to center the window: %w", err)
 	}
 
-	if err := wv.window.show(); err != nil {
+	if err := wv.window.Show(); err != nil {
 		return fmt.Errorf("failed to show the window: %w", err)
 	}
 
-	if err := wv.window.focus(); err != nil {
+	if err := wv.window.Focus(); err != nil {
 		return fmt.Errorf("failed to set focus: %w", err)
 	}
 

@@ -15,10 +15,11 @@ func main() {
 		webview2.WithDevtools(false),
 		webview2.WithURL("https://golang.org"),
 	)
-
 	if err != nil {
 		log.Fatalf("Failed to create webview2: %v", err)
 	}
+
+	wv.Browser().ExecuteScript("alert('Hello from webview!');")
 
 	if err := wv.Run(); err != nil {
 		log.Fatalf("Failed while running webview: %v", err)
