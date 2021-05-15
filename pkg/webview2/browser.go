@@ -36,6 +36,10 @@ type browser struct {
 	controllerCompleted int32
 }
 
+func (wv *WebView) Browser() *browser {
+	return wv.browser
+}
+
 func (b *browser) embed(wv *WebView) error {
 	b.hwnd = wv.window.handle
 
