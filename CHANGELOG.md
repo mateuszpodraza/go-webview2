@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.0.1](https://www.github.com/mattpodraza/webview2/compare/v2.0.0...v2.0.1) (2021-05-15)
+
+
+### Chores
+
+* on second thought, let's keep the generated files in the repo ([7f981d0](https://www.github.com/mattpodraza/webview2/commit/7f981d0579a535b2db8a3067cab981aa83a3c20a))
+
 ## [2.0.0](https://www.github.com/mattpodraza/webview2/compare/v1.0.1...v2.0.0) (2021-05-15)
 
 
