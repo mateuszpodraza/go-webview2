@@ -1,83 +1,72 @@
 package webview2
 
-func WithTitle(title string) Option {
-	return func(wv *WebView) error {
-		return wv.SetTitle(title)
+type Option func(*WebView)
+
+func WithSize(width, height int32) Option {
+	return func(wv *WebView) {
+		wv.window.config.width = width
+		wv.window.config.height = height
 	}
 }
 
-func WithSize(width, height int, hint Hint) Option {
-	return func(wv *WebView) error {
-		return wv.SetSize(width, height, hint)
+func WithMinSize(width, height int32) Option {
+	return func(wv *WebView) {
+		wv.window.config.minWidth = width
+		wv.window.config.minHeight = height
+	}
+}
+
+func WithMaxSize(width, height int32) Option {
+	return func(wv *WebView) {
+		wv.window.config.maxWidth = width
+		wv.window.config.maxHeight = height
+	}
+}
+
+func WithTitle(title string) Option {
+	return func(wv *WebView) {
+		wv.window.config.title = title
 	}
 }
 
 func WithURL(url string) Option {
-	return func(wv *WebView) error {
-		return wv.Navigate(url)
+	return func(wv *WebView) {
+		wv.browser.config.initialURL = url
 	}
 }
 
-// The following are not yet implemented, they do nothing.
+// Initial testing tells me that WithDevTools seems to be the only one that actually works.
 func WithDevtools(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.devtoolsDisabled = !enabled
-		return nil
+	return func(wv *WebView) {
+		wv.browser.config.devtools = enabled
 	}
 }
 
+// Context menus are also disabled if you disable DevTools.
+// See the comment above WithDevtools.
 func WithDefaultContextMenus(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.defaultContextMenusDisabled = !enabled
-		return nil
+	return func(wv *WebView) {
+		wv.browser.config.defaultContextMenus = enabled
 	}
 }
 
-func WithDefaultScriptDialogs(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.defaultScriptDialogsDisabled = !enabled
-		return nil
+// See the comment above WithDevtools.
+func WithBuiltinErrorPage(enabled bool) Option {
+	return func(wv *WebView) {
+		wv.browser.config.builtInErrorPage = enabled
 	}
 }
 
-func WithHostObjects(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.hostObjectsDisallowed = !enabled
-		return nil
-	}
-}
-
-func WithBuiltInErrorPage(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.builtInErrorPageDisabled = !enabled
-		return nil
-	}
-}
-
-func WithScript(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.scriptDisabled = !enabled
-		return nil
-	}
-}
-
+// See the comment above WithDevtools.
 func WithStatusBar(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.statusBarDisabled = !enabled
-		return nil
+	return func(wv *WebView) {
+		wv.browser.config.statusBar = enabled
 	}
 }
 
-func WithWebMessage(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.webMessageDisabled = !enabled
-		return nil
-	}
-}
-
+// See the comment above WithDevtools.
 func WithZoomControl(enabled bool) Option {
-	return func(wv *WebView) error {
-		wv.config.zoomControlDisabled = !enabled
-		return nil
+	return func(wv *WebView) {
+		wv.browser.config.zoomControl = enabled
 	}
 }
