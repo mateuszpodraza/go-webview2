@@ -82,7 +82,7 @@ func New(options ...Option) (*WebView, error) {
 		return nil, fmt.Errorf("failed to initialize the window: %w", err)
 	}
 
-	if err := wv.browser.navigate(wv.browser.config.initialURL); err != nil {
+	if err := wv.browser.Navigate(wv.browser.config.initialURL); err != nil {
 		return nil, fmt.Errorf("failed at the initial navigation: %w", err)
 	}
 
