@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/mattpodraza/webview2/compare/v1.0.1...v2.0.0) (2021-05-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump module to v2
+* add support for changing WebView settings
+
+### Features
+
+* add a com package for handling calls to the WebView COM objects ([1576395](https://www.github.com/mattpodraza/webview2/commit/15763954d9eb980eaa068ac2723039d71a877181))
+* add a helper package for handling mapping HRESULT values ([53a4d32](https://www.github.com/mattpodraza/webview2/commit/53a4d32b9fcb8d68157ca487df1734bbea9f5493))
+* add support for changing WebView settings ([f770ec0](https://www.github.com/mattpodraza/webview2/commit/f770ec073c604c4b00375a5a46dbf4a799a22ac1))
+
+
+### Chores
+
+* bump module to v2 ([771d662](https://www.github.com/mattpodraza/webview2/commit/771d6620796f94efb4bd52aa2c531133d295f5f0))
+* bump the WebViewLoader2.dll ([8dfb93f](https://www.github.com/mattpodraza/webview2/commit/8dfb93f5f437dd06b52811f2afdc39bc0b4e6d4c))
+
+
+### Documentation
+
+* update examples ([128fafe](https://www.github.com/mattpodraza/webview2/commit/128fafebd08b3b0d6de0d7af518738d143fb8895))
+* update the readme and license to point to this being a derived work based on two upstream repos ([f00697e](https://www.github.com/mattpodraza/webview2/commit/f00697eb6c9f1c44dcd3271666c74e19002383d1))
+
 ### [1.0.1](https://www.github.com/mattpodraza/webview2/compare/v1.0.0...v1.0.1) (2021-05-03)
 
 
