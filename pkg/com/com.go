@@ -207,24 +207,24 @@ type (
 type (
 	ICoreWebView2SettingsVTBL struct {
 		BasicVTBL
-		GetAreDefaultContextMenusEnabled  uintptr
-		GetAreDefaultScriptDialogsEnabled uintptr
-		GetAreDevToolsEnabled             uintptr
-		GetAreHostObjectsAllowed          uintptr
-		GetIsBuiltInErrorPageEnabled      uintptr
 		GetIsScriptEnabled                uintptr
-		GetIsStatusBarEnabled             uintptr
-		GetIsWebMessageEnabled            uintptr
-		GetIsZoomControlEnabled           uintptr
-		PutAreDefaultContextMenusEnabled  uintptr
-		PutAreDefaultScriptDialogsEnabled uintptr
-		PutAreDevToolsEnabled             uintptr
-		PutAreHostObjectsAllowed          uintptr
-		PutIsBuiltInErrorPageEnabled      uintptr
 		PutIsScriptEnabled                uintptr
-		PutIsStatusBarEnabled             uintptr
+		GetIsWebMessageEnabled            uintptr
 		PutIsWebMessageEnabled            uintptr
+		GetAreDefaultScriptDialogsEnabled uintptr
+		PutAreDefaultScriptDialogsEnabled uintptr
+		GetIsStatusBarEnabled             uintptr
+		PutIsStatusBarEnabled             uintptr
+		GetAreDevToolsEnabled             uintptr
+		PutAreDevToolsEnabled             uintptr
+		GetAreDefaultContextMenusEnabled  uintptr
+		PutAreDefaultContextMenusEnabled  uintptr
+		GetAreHostObjectsAllowed          uintptr
+		PutAreHostObjectsAllowed          uintptr
+		GetIsZoomControlEnabled           uintptr
 		PutIsZoomControlEnabled           uintptr
+		GetIsBuiltInErrorPageEnabled      uintptr
+		PutIsBuiltInErrorPageEnabled      uintptr
 	}
 
 	ICoreWebView2Settings struct {

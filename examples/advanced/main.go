@@ -13,6 +13,8 @@ func main() {
 		webview2.WithSize(800, 600),
 		webview2.WithMaxSize(1280, 720),
 		webview2.WithDevtools(false),
+		webview2.WithDefaultContextMenus(false),
+		webview2.WithStatusBar(false),
 		webview2.WithURL("https://golang.org"),
 	)
 	if err != nil {
