@@ -18,11 +18,15 @@ import (
 type browserConfig struct {
 	initialURL string
 
-	defaultContextMenus bool
-	devtools            bool
-	builtInErrorPage    bool
-	statusBar           bool
-	zoomControl         bool
+	builtInErrorPage     bool
+	defaultContextMenus  bool
+	defaultScriptDialogs bool
+	devtools             bool
+	hostObjects          bool
+	script               bool
+	statusBar            bool
+	webMessage           bool
+	zoomControl          bool
 }
 
 type browser struct {
@@ -196,19 +200,37 @@ func (b *browser) saveSetting(setter uintptr, enabled bool) error {
 }
 
 func (b *browser) saveSettings() error {
+	if err := b.saveSetting(b.settings.VTBL.PutIsBuiltInErrorPageEnabled, b.config.builtInErrorPage); err != nil {
+		return err
+	}
+
 	if err := b.saveSetting(b.settings.VTBL.PutAreDefaultContextMenusEnabled, b.config.defaultContextMenus); err != nil {
+		return err
+	}
+
+	if err := b.saveSetting(b.settings.VTBL.PutAreDefaultScriptDialogsEnabled, b.config.defaultScriptDialogs); err != nil {
 		return err
 	}
 
 	if err := b.saveSetting(b.settings.VTBL.PutAreDevToolsEnabled, b.config.devtools); err != nil {
 		return err
+
 	}
 
-	if err := b.saveSetting(b.settings.VTBL.PutIsBuiltInErrorPageEnabled, b.config.builtInErrorPage); err != nil {
+	if err := b.saveSetting(b.settings.VTBL.PutAreHostObjectsAllowed, b.config.hostObjects); err != nil {
+		return err
+	}
+
+	if err := b.saveSetting(b.settings.VTBL.PutIsScriptEnabled, b.config.script); err != nil {
 		return err
 	}
 
 	if err := b.saveSetting(b.settings.VTBL.PutIsStatusBarEnabled, b.config.statusBar); err != nil {
+		return err
+
+	}
+
+	if err := b.saveSetting(b.settings.VTBL.PutIsWebMessageEnabled, b.config.webMessage); err != nil {
 		return err
 	}
 
