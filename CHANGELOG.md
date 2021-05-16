@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.0](https://www.github.com/mattpodraza/webview2/compare/v2.1.1...v2.2.0) (2021-05-16)
+
+
+### Features
+
+* add a Handle function that returns the window handle for better control of the window outside of this package. ([b64a658](https://www.github.com/mattpodraza/webview2/commit/b64a65832852d1f04c370992c076a8c79ee4ba23))
+* add Minimize, Restore, and Maximize window functions. ([b64a658](https://www.github.com/mattpodraza/webview2/commit/b64a65832852d1f04c370992c076a8c79ee4ba23))
+* add support for the rest of WebView settings ([0720c85](https://www.github.com/mattpodraza/webview2/commit/0720c85c729100c8b441118e89a6555406a24c4a))
+
 ### [2.1.1](https://www.github.com/mattpodraza/webview2/compare/v2.1.0...v2.1.1) (2021-05-16)
 
 
