@@ -231,7 +231,7 @@ func (wv *WebView) Run() error {
 			return fmt.Errorf("failed to get message: %w", err)
 		}
 
-		if msg == nil || msg.Message == user32.WMQuit {
+		if msg.Message == user32.WMQuit {
 			return nil
 		}
 

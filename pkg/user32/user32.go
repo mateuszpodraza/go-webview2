@@ -125,23 +125,18 @@ type MinMaxInfo struct {
 	MaxTrackSize Point
 }
 
-// Returns nil on WM_QUIT.
 func GetMessageW() (*Msg, error) {
 	var msg Msg
 
-	r, _, err := getMessageW.Call(
+	r, _, _ := getMessageW.Call(
 		uintptr(unsafe.Pointer(&msg)),
 		0,
 		0,
 		0,
 	)
 
-	if err != nil && !errors.Is(err, errOK) {
-		return nil, err
-	}
-
-	if r == 0 {
-		return nil, nil
+	if int32(r) == -1 {
+		return nil, windows.GetLastError()
 	}
 
 	return &msg, nil
