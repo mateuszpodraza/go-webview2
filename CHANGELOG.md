@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.1.1](https://www.github.com/mattpodraza/webview2/compare/v2.1.0...v2.1.1) (2021-05-16)
+
+
+### Bug Fixes
+
+* **com:** proper ordering of COM object methods ([786d915](https://www.github.com/mattpodraza/webview2/commit/786d915bd2b1b51fc547c359ff9dd5baef10abd0))
+* **user32:** rely on the return value of GetMessage instead of the error return value ([adafe38](https://www.github.com/mattpodraza/webview2/commit/adafe38d637c276659af1111c2f917ac534ab1c5))
+
 ## [2.1.0](https://www.github.com/mattpodraza/webview2/compare/v2.0.1...v2.1.0) (2021-05-15)
 
 
