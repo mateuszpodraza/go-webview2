@@ -23,12 +23,28 @@ func (wv *WebView) Window() *window {
 	return wv.window
 }
 
+func (w *window) Handle() windows.Handle {
+	return w.handle
+}
+
 func (w *window) Focus() error {
 	return user32.SetFocus(w.handle)
 }
 
+func (w *window) Minimize() error {
+	return user32.ShowWindow(w.handle, user32.SW_MINIMIZE)
+}
+
 func (w *window) Show() error {
 	return user32.ShowWindow(w.handle, user32.SW_SHOW)
+}
+
+func (w *window) Restore() error {
+	return user32.ShowWindow(w.handle, user32.SW_RESTORE)
+}
+
+func (w *window) Maximize() error {
+	return user32.ShowWindow(w.handle, user32.SW_SHOWMAXIMIZED)
 }
 
 func (w *window) SetTitle(title string) error {

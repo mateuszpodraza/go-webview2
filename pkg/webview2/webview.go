@@ -240,7 +240,7 @@ func (wv *WebView) Run() error {
 			return fmt.Errorf("failed to translate message: %w", err)
 		}
 
-		// TODO: Closing the window while it's trying to dispatch the image causes an error here.
+		// TODO: Closing the window while it's trying to dispatch the message causes an error here.
 		// We should probably ignore it.
 		err = user32.DispatchMessageW(msg)
 		if err != nil {
