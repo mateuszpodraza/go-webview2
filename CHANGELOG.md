@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.1](https://www.github.com/mattpodraza/webview2/compare/v2.2.0...v2.2.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* add setters for missing options, provide reasonable defaults ([f3d7d2e](https://www.github.com/mattpodraza/webview2/commit/f3d7d2e5e4c68b992449d281a1e67745e702de8b))
+
 ## [2.2.0](https://www.github.com/mattpodraza/webview2/compare/v2.1.1...v2.2.0) (2021-05-16)
 
 
