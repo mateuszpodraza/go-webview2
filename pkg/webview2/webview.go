@@ -49,12 +49,16 @@ func New(options ...Option) (*WebView, error) {
 		},
 		browser: &browser{
 			config: &browserConfig{
-				initialURL:          "about:blank",
-				devtools:            true,
-				defaultContextMenus: true,
-				builtInErrorPage:    true,
-				statusBar:           true,
-				zoomControl:         true,
+				initialURL:           "about:blank",
+				builtInErrorPage:     true,
+				defaultContextMenus:  true,
+				defaultScriptDialogs: true,
+				devtools:             true,
+				hostObjects:          true,
+				script:               true,
+				statusBar:            true,
+				webMessage:           true,
+				zoomControl:          true,
 			},
 		},
 	}
